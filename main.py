@@ -1,14 +1,9 @@
-from deck import Card
+from deck import Deck
 
 def main():
-    cAC = Card(0,0)
-    cQD = Card(2, 12)
-    cS4 = Card(4, 2)
+    deck = Deck()
 
-    print(cAC.showString())
-    print(cQD.showString())
-    print(cS4.showString())
-
-
+    deck.shuffle()
+    print(deck.drawCard().showString())
 
 main()

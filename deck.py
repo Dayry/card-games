@@ -1,8 +1,30 @@
+import random
+
 class Deck:
-    def __init__(self):
 
+    def __init__(self, cardList=None, joker=False):
+        self.cards = []
+        self.reset()
 
+    def drawCard(self):
+        return self.cards.pop()
+
+    def cardsLeft(self):
+        return len(self.cards)
+    
+    def discard(self):
+        pass
+        # is this needed?
+
+    def shuffle(self):
+        random.shuffle(self.cards)
         
+    def reset(self):
+        self.cards = []
+        for s in range(1, 5):
+            for v in range(1, 14):
+                self.cards.append(Card(s, v))
+
 
 class Card:
 
@@ -12,7 +34,6 @@ class Card:
         self.suit, self.value = self._getValSuit()
 
     def _getValSuit(self):
-        #clubs diamonds hearts spades
         s = self.numSuit
         v = self.numValue
         suit = 0
