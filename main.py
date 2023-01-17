@@ -1,9 +1,8 @@
 from deck import Deck
+from highest import Highest
 
 def main():
-    deck = Deck()
-
-    deck.shuffle()
-    print(deck.drawCard().showString())
+    highest = Highest(10, 100)
+    highest.next_turn()
 
 main()

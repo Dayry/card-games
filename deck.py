@@ -2,14 +2,14 @@ import random
 
 class Deck:
 
-    def __init__(self, cardList=None, joker=False):
+    def __init__(self, card_list=None, joker=False):
         self.cards = []
         self.reset()
 
-    def drawCard(self):
+    def draw_card(self):
         return self.cards.pop()
 
-    def cardsLeft(self):
+    def cards_left(self):
         return len(self.cards)
     
     def discard(self):
@@ -28,14 +28,14 @@ class Deck:
 
 class Card:
 
-    def __init__(self, numSuit, numValue):
-        self.numSuit = numSuit
-        self.numValue = numValue
-        self.suit, self.value = self._getValSuit()
+    def __init__(self, num_suit, num_value):
+        self.num_suit = num_suit
+        self.num_value = num_value
+        self.suit, self.value = self._get_val_suit()
 
-    def _getValSuit(self):
-        s = self.numSuit
-        v = self.numValue
+    def _get_val_suit(self):
+        s = self.num_suit
+        v = self.num_value
         suit = 0
         value = 0
 
@@ -81,7 +81,7 @@ class Card:
 
         return suit, value
 
-    def showString(self):
-        if self.numSuit == 0:
+    def show_string(self):
+        if self.num_suit == 0:
             return "Joker"
         return f"{self.value} of {self.suit}"
