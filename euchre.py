@@ -1,4 +1,5 @@
 from deck import Deck
+import os
 
 class Euchre:
 
@@ -39,13 +40,63 @@ class Euchre:
         
         self.trump = self.deck.draw_card()
 
-        cards = []
+        cards = {}
+        leading = None
+        trump = "spades"
+        # When set trump, called set_bower_values() to change the 
+        # jacks value to 15 (left) and 16 (right)
+        # e.g. jack of clubs would be 15, jack of spaces 16
+        #self.set_bower_values("spades")
 
         for hand in self.hands:
-            cards.append(self.choose_card(hand))
+            if leading:
+                print(f"Leading suit: {leading}, Trump: {trump}") 
+                cards[hand] = self.choose_card(hand)
+            else:
+                cards[hand] = self.choose_card(hand)
+                leading = cards[hand].suit
+                print(f"Leading suit is now: {leading}")
+            print("==================")
 
-        for card in cards:
-            print(card.show_string())
+        winning_card, winner = self.round_winner(cards, trump)
+        print(f"Player {winner} wins this round with {winning_card.show_string()}")
+
+    def set_bower_values(self, right_bower, left_bower, trump):
+        if trump == "clubs": 
+            # set jack of clubs values to 16, jack of spades value to 15
+            print(self.deck.cards[1][11])
+            print(self.deck.cards[4][11])
+        elif trump == "diamonds":
+            # set jack of diamonds values to 16, jack of hearts value to 15
+            print(self.deck.cards[2][11])
+            print(self.deck.cards[3][11])
+        elif trump == "hearts":
+            # set jack of hearts values to 16, jack of diamonds value to 15
+            print(self.deck.cards[3][11])
+            print(self.deck.cards[2][11])
+        else: # set jack of spades values to 16, jack of clubs value to 15
+            pass
+            #print(self.deck.cards[4][11])
+            #print(self.deck.cards[1][11])
+    
+    def round_winner(self, cards, trump):
+        for i in range(1, self.num_players + 1):
+            if cards[i].value == "jack" and cards[i].suit == trump:
+                card[i].num_value = 16
+        # check left bower
+
+        curr_winner_card = cards[1]
+        curr_winner = 1
+        leading = curr_winner_card.suit
+        for i in range(2, self.num_players + 1):
+            if curr_winner_card.suit == trump:
+                if cards[i].value > curr_winner_card.value:
+                    curr_winner_card = cards[i]
+                    curr_winner = i
+        
+        return curr_winner_card, curr_winner
+        
+
 
     """
     A turn is when one person plays one card
@@ -59,12 +110,14 @@ class Euchre:
         pass
 
     def choose_card(self, player):
+        count = 1
         print(f"Player {player}'s hand is: ")
         for card in self.hands[player]:
             if card != None:
-                print(card.show_string())
+                print(f"{count}:{card.show_string()}")
             else:
-                print("No card")
+                print(f"{count}:No card")
+            count += 1
 
         bad_input = True
         card = None

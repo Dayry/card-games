@@ -19,6 +19,12 @@ class Deck:
 
     def shuffle(self):
         random.shuffle(self.cards)
+
+    # def find_card(self, num_suit, num_value):
+    #     for i in range(0, len(self.cards) - 1):
+    #         print(f"{self.cards[i].show_string()} {self.cards[i].suit} {self.cards[i].value}")
+    #         if self.cards[i].num_suit == num_suit and self.cards[i].num_value == num_value:
+    #             return i
         
     def reset(self):
         self.cards = []
@@ -78,7 +84,7 @@ class Card:
             value = "Nine"
         elif v == 10:
             value = "Ten"
-        elif v == 11:
+        elif v == 11 or v == 15 or v == 16:
             value = "Jack"
         elif v == 12:
             value = "Queen"
