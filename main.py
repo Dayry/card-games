@@ -1,8 +1,8 @@
 from deck import Deck
 from highest import Highest
+from euchre import Euchre
 
 def main():
-    highest = Highest(10, 100)
-    highest.next_turn()
+    uka = Euchre(3)
 
 main()

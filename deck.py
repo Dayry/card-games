@@ -3,6 +3,7 @@ import random
 class Deck:
 
     def __init__(self, card_list=None, joker=False):
+        self.card_list = card_list
         self.cards = []
         self.reset()
 
@@ -21,6 +22,13 @@ class Deck:
         
     def reset(self):
         self.cards = []
+
+        if self.card_list == "euchre":
+            for s in range(1, 5):
+                for v in range(7, 15):
+                    self.cards.append(Card(s, v))
+            return
+
         for s in range(1, 5):
             for v in range(1, 14):
                 self.cards.append(Card(s, v))
@@ -50,7 +58,7 @@ class Card:
         else:
             suit = "Joker"
 
-        if v == 1:
+        if v == 1 or v == 14:
             value = "Ace"
         elif v == 2:
             value = "Two"
