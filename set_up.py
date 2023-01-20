@@ -1,5 +1,17 @@
 import random
 
+def set_up(num_players):
+    deck = create_deck()
+    deck = shuffle_deck(deck)
+
+    hands, deck = deal(deck, num_players)
+    flipped_card = deck.pop()
+
+    return hands, flipped_card
+    
+
+    
+
 """
 Returns an ordered array of Cards making up a euchre deck.
 """
@@ -41,6 +53,7 @@ def deal(deck, num_players):
 Given an array of Cards, shows them to the user and returns the index of the
 card they chose.
 """
+# MOVE THIS
 def get_user_card(hand, player):
     count = 1
     print(f"Player {player}'s hand is: ")
