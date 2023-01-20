@@ -1,142 +1,130 @@
-from deck import Deck
-import os
+import random
 
-class Euchre:
+"""
+Returns an ordered array of Cards making up a euchre deck.
+"""
+def create_deck():
+    deck = []
 
-    def __init__(self, num_players, winning_score=11):
-        self.deck = Deck(card_list="euchre")
-        self.deck.shuffle()
+    for s in range(1, 5): # Suits
+        for v in range(7, 15): # Values
+            deck.append(Card(s, v))
 
-        self.num_players = num_players
-        self.winning_score = winning_score
+    return deck
 
-        self.scores = {}
-        
-        self.dealer = 1
-        self.player = 1
-        self.caller = None
+"""
+Takes a deck and returns a shuffled copy.
+"""
+def shuffle_deck(deck):
+    random.shuffle(deck)
+    return deck
 
-        self.hands = {}
-        self.trump = None
-
-        for p in range(1, num_players + 1):
-            self.scores[p] = 0
-            self.hands[p] = [None, None, None, None, None]
-
-        self.new_round()
-
-        
-        #print(f"Player {2} chose {self.choose_card(2).show_string()}")
+"""
+Deals 5 cards from the given deck for each number of players and 
+returns them in a list, along with the remaining deck.
+"""
+def deal(deck, num_players):
+    # Create empty hands
+    hands = {}
+    for p in range(1, num_players  + 1):
+        hands[p] = [None, None, None, None, None]
 
 
-    """
-    A round is over when everyones played all 5 of there cards. So all players
-    have had 5 turns.
-    """
-    def new_round(self):
-        for p in range(1, self.num_players + 1):
+    for p in range(1, num_players + 1):
             for i in range(0, 5):
-                self.hands[p][i] = self.deck.draw_card()
+                hands[p][i] = deck.pop()
         
-        self.trump = self.deck.draw_card()
+    return hands, deck
+    #self.trump = self.deck.draw_card()
 
-        cards = {}
-        leading = None
-        trump = "spades"
-        # When set trump, called set_bower_values() to change the 
-        # jacks value to 15 (left) and 16 (right)
-        # e.g. jack of clubs would be 15, jack of spaces 16
-        #self.set_bower_values("spades")
+"""
+Given an array of Cards, shows them to the user and returns the index of the
+card they chose.
+"""
+def get_user_card(hand, player):
+    count = 1
+    print(f"Player {player}'s hand is: ")
+    for card in hand:
+        if card != None:
+            print(f"{count}:{card.show_string()}")
+        else:
+            print(f"{count}:No card")
+        count += 1
+            
+    while True:
+        player_input = input("Enter a card index:")
+        try:
+            int(player_input)
+        except:
+            print("Enter a number")
+            continue
+        if int(player_input) < 1 or int(player_input) > 5:
+            print("Enter a valid index")
+            continue
+        if hand[int(player_input) - 1] == None:
+            print("Enter a valid index")
+            continue
 
-        for hand in self.hands:
-            if leading:
-                print(f"Leading suit: {leading}, Trump: {trump}") 
-                cards[hand] = self.choose_card(hand)
-            else:
-                cards[hand] = self.choose_card(hand)
-                leading = cards[hand].suit
-                print(f"Leading suit is now: {leading}")
-            print("==================")
-
-        winning_card, winner = self.round_winner(cards, trump)
-        print(f"Player {winner} wins this round with {winning_card.show_string()}")
-
-    def set_bower_values(self, right_bower, left_bower, trump):
-        if trump == "clubs": 
-            # set jack of clubs values to 16, jack of spades value to 15
-            print(self.deck.cards[1][11])
-            print(self.deck.cards[4][11])
-        elif trump == "diamonds":
-            # set jack of diamonds values to 16, jack of hearts value to 15
-            print(self.deck.cards[2][11])
-            print(self.deck.cards[3][11])
-        elif trump == "hearts":
-            # set jack of hearts values to 16, jack of diamonds value to 15
-            print(self.deck.cards[3][11])
-            print(self.deck.cards[2][11])
-        else: # set jack of spades values to 16, jack of clubs value to 15
-            pass
-            #print(self.deck.cards[4][11])
-            #print(self.deck.cards[1][11])
-    
-    def round_winner(self, cards, trump):
-        for i in range(1, self.num_players + 1):
-            if cards[i].value == "jack" and cards[i].suit == trump:
-                card[i].num_value = 16
-        # check left bower
-
-        curr_winner_card = cards[1]
-        curr_winner = 1
-        leading = curr_winner_card.suit
-        for i in range(2, self.num_players + 1):
-            if curr_winner_card.suit == trump:
-                if cards[i].value > curr_winner_card.value:
-                    curr_winner_card = cards[i]
-                    curr_winner = i
-        
-        return curr_winner_card, curr_winner
-        
+        # Note the list is from 1 to 5 but the actual index is 0-4
+        # this returns the actual index
+        return int(player_input) - 1
 
 
-    """
-    A turn is when one person plays one card
-    """
-    def next_turn(self, player):
-        pass
-
-    def set_trump(self):
-        if self.dealer + 1 <= self.num_players:
-            pass
-        pass
-
-    def choose_card(self, player):
-        count = 1
-        print(f"Player {player}'s hand is: ")
-        for card in self.hands[player]:
-            if card != None:
-                print(f"{count}:{card.show_string()}")
-            else:
-                print(f"{count}:No card")
-            count += 1
-
-        bad_input = True
-        card = None
-        while bad_input:
-            player_input = input("Enter a card index:")
-            try:
-                int(player_input)
-            except:
-                print("Enter a number")
-                continue
-            if int(player_input) < 1 or int(player_input) > 5:
-                print("Enter a valid index")
-                continue
-            if self.hands[player][int(player_input) - 1] == None:
-                print("Enter a valid index")
-                continue
-
-            card = self.hands[player][int(player_input) - 1]
-            bad_input = False
-        return card
 
 
+
+class Card:
+
+    def __init__(self, num_suit, num_value):
+        self.num_suit = num_suit
+        self.num_value = num_value
+        self.suit, self.value = self._get_val_suit()
+
+    def _get_val_suit(self):
+        s = self.num_suit
+        v = self.num_value
+        suit = 0
+        value = 0
+
+        if s == 1:
+            suit = "Hearts"
+        elif s == 2:
+            suit = "Diamonds"
+        elif s == 3:
+            suit = "Clubs"
+        elif s == 4:
+            suit = "Spades"
+        else:
+            print("Invalid suit number")
+
+        if v == 1 or v == 14:
+            value = "Ace"
+        elif v == 2:
+            value = "Two"
+        elif v == 3:
+            value = "Three"
+        elif v == 4:
+            value = "Four"
+        elif v == 5:
+            value = "Five"
+        elif v == 6:
+            value = "Six"
+        elif v == 7:
+            value = "Seven"
+        elif v == 8:
+            value = "Eight"
+        elif v == 9:
+            value = "Nine"
+        elif v == 10:
+            value = "Ten"
+        elif v == 12:
+            value = "Queen"
+        elif v == 13:
+            value = "King"
+        else: # v == 11 or v == 15 or v == 16+:
+            value = "Jack"
+
+        return suit, value
+
+    def show_string(self):
+        return f"{self.value} of {self.suit}"

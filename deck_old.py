@@ -54,15 +54,15 @@ class Card:
         value = 0
 
         if s == 1:
-            suit = "Clubs"
+            suit = "Hearts"
         elif s == 2:
             suit = "Diamonds"
         elif s == 3:
-            suit = "Hearts"
+            suit = "Clubs"
         elif s == 4:
             suit = "Spades"
         else:
-            suit = "Joker"
+            print("Invalid suit number")
 
         if v == 1 or v == 14:
             value = "Ace"
@@ -84,18 +84,14 @@ class Card:
             value = "Nine"
         elif v == 10:
             value = "Ten"
-        elif v == 11 or v == 15 or v == 16:
-            value = "Jack"
         elif v == 12:
             value = "Queen"
         elif v == 13:
             value = "King"
-        else:
-            value = "Joker"
+        else: # v == 11 or v == 15 or v == 16+:
+            value = "Jack"
 
         return suit, value
 
     def show_string(self):
-        if self.num_suit == 0:
-            return "Joker"
         return f"{self.value} of {self.suit}"
