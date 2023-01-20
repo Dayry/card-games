@@ -1,4 +1,5 @@
 from set_up import set_up
+from choose_trump import *
 
 def main():
     num_players = 3
@@ -11,6 +12,15 @@ def main():
             print(player_hands[player][card].show_string())
         print("==========")
     print(f"Flipped card: {flipped_card.show_string()}")
+
+    print(f"Dealer: {1}")
+    print(order_pick_up(num_players, 1, flipped_card))
+    # print(f"Dealer: {2}")
+    # print(order_pick_up(num_players, 2, flipped_card))
+    # print(f"Dealer: {3}")
+    # print(order_pick_up(num_players, 3, flipped_card))
+    player_made, suit = make_trump(num_players, 1, flipped_card)
+    print(f"Player {player_made} made trumps: {suit}")
 
     
 

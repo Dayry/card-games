@@ -1,5 +1,8 @@
 import random
 
+"""
+Takes a number of players and returns a hand for each player and a flipped card.
+"""
 def set_up(num_players):
     deck = create_deck()
     deck = shuffle_deck(deck)
@@ -9,7 +12,6 @@ def set_up(num_players):
 
     return hands, flipped_card
     
-
     
 
 """
