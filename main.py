@@ -1,11 +1,45 @@
 from set_up import set_up
-from choose_trump import *
+from choose_trump import choose_trump
 
 def main():
     num_players = 3
     player_hands, flipped_card = set_up(num_players)
+    print_hands(num_players, player_hands, flipped_card)
 
-    # Deal
+    dealer = 1
+    print(f"Dealer is player {dealer}")
+    player_made, trumps = choose_trump(num_players, dealer, flipped_card)
+
+    if player_made < 0: # Reset hands and flipped card
+        print("Reset")
+        player_hands, flipped_card = set_up(num_players)
+        print_hands(num_players, player_hands, flipped_card)
+    elif trumps == None:
+        print(f"Player {player_made} ordered up the dealer")
+    else:
+        print(f"Player {player_made} made trumps {trumps}")
+
+    # Test order pick up
+    # print(f"Dealer: {1}")
+    # print(order_pick_up(num_players, 1, flipped_card))
+
+    # Test choose trumps
+    
+
+    # player_made, suit = make_trump(num_players, 1, "hearts")
+    # print(f"Player {player_made} made trumps: {suit}")
+
+    
+
+    # to do:
+    # begin match
+    # get get_user_card goes here somewhere
+
+    # test for get_user_card()
+    # index = get_user_card(hands[1], 1)
+    # print(hands[1][index].show_string())
+
+def print_hands(num_players, player_hands, flipped_card):
     for player in range(1, num_players + 1):
         print(f"Player {player}'s hand:")
         for card in range(0, 5):
@@ -13,28 +47,5 @@ def main():
         print("==========")
     print(f"Flipped card: {flipped_card.show_string()}")
 
-    print(f"Dealer: {1}")
-    print(order_pick_up(num_players, 1, flipped_card))
-    # print(f"Dealer: {2}")
-    # print(order_pick_up(num_players, 2, flipped_card))
-    # print(f"Dealer: {3}")
-    # print(order_pick_up(num_players, 3, flipped_card))
-    player_made, suit = make_trump(num_players, 1, flipped_card)
-    print(f"Player {player_made} made trumps: {suit}")
-
-    
-
-    # to do:
-    # Trump.py
-    # - order up each player
-    # - make trump each player
-    # - reset
-    # begin match
-    # get get_user_card goes here somewhere
-
-    # test for get_user_card()
-    # index = get_user_card(hands[1], 1)
-    # print(hands[1][index].show_string())
-    
 
 main()
