@@ -39,7 +39,10 @@ def main():
     # to do:
     # if ordered to pick up, dealer needs to swap with flipped
     # Change the value and suit of the left bower once trumps is set
-    # round winner
+    # track each round winner
+    # impliment match (5 rounds)
+
+
 
     # test for get_user_card()
     # index = get_user_card(hands[1], 1)

@@ -23,14 +23,49 @@ def new_round(player_hands, num_players, trumps, dealer):
     print(f"Round winner was player: {round_winner(played_cards, trumps)}")
 
 def round_winner(played_cards, trumps):
-    # lead is trumps
-
     winner_card = played_cards[0]
-    winner_player = -1
-    for card_index in range(0, len(played_cards))
+    for card_index in range(0, len(played_cards)):
         curr_card = played_cards[card_index]
-        if curr_card.suit == winner.suit:
-            if curr_card.value > winner.value:
+        winner_card = compare_cards(winner_card, curr_card, trumps)
+    
+    # Fix this
+    for card_index in range(0, len(played_cards)):
+        curr_card = played_cards[card_index]
+        if curr_card == winner_card:
+            return card_index + 1 # this is the player who won
+    
+def compare_cards(lead, played, trumps):
+    # 1. lead is trumps
+    if lead.suit == trumps:
+        # a. played is not trumps -> lead wins
+        if played.suit != trumps:
+            return lead
+        # b. played is trumps -> higher value wins
+        else:
+            if played.value > lead.value:
+                return played
+            else:
+                return lead
+    
+    # 2. lead is not trumps
+    # a. played is trumps -> played wins
+    if played.suit == trumps:
+        return played
+    # b. played is not trumps
+    else:
+    #   1. played is not lead -> lead wins
+        if played.suit != lead.suit:
+            return lead
+    #   2. played is lead -> higher value wins
+        else:
+            if played.value > lead.value:
+                return played
+            else:
+                return lead
+
+
+
+
 
 
 
