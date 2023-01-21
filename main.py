@@ -25,11 +25,9 @@ def main():
 
     player_hands = change_jack_value(player_hands, trumps, num_players)
 
-    for player in range(1, num_players + 1):
-        for card_i in range(0, 5):
-            print(f"{player_hands[player][card_i].show_string()}, value: {player_hands[player][card_i].num_value}")
+    
 
-    #new_round(player_hands, num_players, trumps, dealer)
+    new_round(player_hands, num_players, trumps, dealer)
 
     # Test order pick up
     # print(f"Dealer: {1}")
@@ -44,7 +42,6 @@ def main():
     
 
     # to do:
-    # Change the value and suit of the left bower once trumps is set
     # move some fucntions around, change file names
     # track each round winner
     # remove the played card from players hands
