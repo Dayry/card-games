@@ -35,6 +35,20 @@ def round_winner(played_cards, trumps):
             return card_index + 1 # this is the player who won
     
 def compare_cards(lead, played, trumps):
+    # Special case: bowers
+    # Right bower
+    if lead.num_value == 16:
+        return lead
+    if played.num_value == 16:
+        return played
+    # Left bower: will win as long as the other wasnt the right bower
+    if lead.num_value == 15:
+        if played.num_value != 16:
+            return lead
+        else:
+            return played
+    
+
     # 1. lead is trumps
     if lead.suit == trumps:
         # a. played is not trumps -> lead wins
@@ -62,13 +76,6 @@ def compare_cards(lead, played, trumps):
                 return played
             else:
                 return lead
-
-
-
-
-
-
-
 
 def turn(player_hand, lead):
     chosen_card_index = get_user_card(player_hand, lead)

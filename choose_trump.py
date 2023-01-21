@@ -11,6 +11,7 @@ def choose_trump(num_players, dealer, flipped):
     return -1, None # No one made it
 
 
+
 """
 Given an array of players and the int of the current dealer, asks
 each player if they want to order up the dealer. Returns the int of player
