@@ -6,7 +6,8 @@ def main():
     # Turn one person play a card
 
     # to do:
-    # move some fucntions around, change file names
+    # bug in compare_cards() in new_round
+    # bug: because left bower suit doesnt change, it can't follow or be followed by right
     # track each round winner
     # remove the played card from players hands
     # impliment match (5 rounds)

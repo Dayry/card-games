@@ -4,13 +4,14 @@ def new_round(player_hands, num_players, trumps, dealer):
     if curr_player > num_players:
         curr_player = 1
     lead_suit = None
-    played_cards = []
+    played_cards = {}
 
     while turns <= num_players:
         print(f"Player: {curr_player}")
         # Will only change if lead_suit was None
         lead_suit, played = turn(player_hands[curr_player], lead_suit)
-        played_cards.append(played)
+        #played_cards.append({curr_player: played})
+        played_cards[curr_player] = played
         turns += 1
         curr_player += 1
         if curr_player > num_players:
@@ -21,16 +22,18 @@ def new_round(player_hands, num_players, trumps, dealer):
 
 
 def round_winner(played_cards, trumps):
-    winner_card = played_cards[0]
-    for card_index in range(0, len(played_cards)):
-        curr_card = played_cards[card_index]
+    winner_card = played_cards[1]
+    for player in range(1, len(played_cards) + 1):
+        curr_card = played_cards[player]
         winner_card = compare_cards(winner_card, curr_card, trumps)
+
+    print(f"WINNER CARD: {winner_card.show_string()}")
     
-    # Fix this
-    for card_index in range(0, len(played_cards)):
-        curr_card = played_cards[card_index]
-        if curr_card == winner_card:
-            return card_index + 1 # this is the player who won
+    # Kind of messy having to find the player when the winning 
+    # card is already known
+    for player in range(1, len(played_cards) + 1):
+        if played_cards[player] == winner_card:
+            return player # this is the player who won
     
 def compare_cards(lead, played, trumps):
     # Special case: bowers
