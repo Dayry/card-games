@@ -1,7 +1,3 @@
-# Match is 5 rounds
-# round n turns, one each player
-# Turn one person play a card
-
 def new_round(player_hands, num_players, trumps, dealer):
     turns = 1
     curr_player = dealer + 1
@@ -21,6 +17,8 @@ def new_round(player_hands, num_players, trumps, dealer):
             curr_player = 1
     
     print(f"Round winner was player: {round_winner(played_cards, trumps)}")
+
+
 
 def round_winner(played_cards, trumps):
     winner_card = played_cards[0]
@@ -48,7 +46,6 @@ def compare_cards(lead, played, trumps):
         else:
             return played
     
-
     # 1. lead is trumps
     if lead.suit == trumps:
         # a. played is not trumps -> lead wins
@@ -84,7 +81,7 @@ def turn(player_hand, lead):
         lead = player_hand[chosen_card_index].suit
     return lead, player_hand[chosen_card_index]
 
-    """
+"""
 Given an array of Cards, shows them to the user and returns the index of the
 card they chose.
 """

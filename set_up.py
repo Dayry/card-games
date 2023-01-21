@@ -11,8 +11,18 @@ def set_up(num_players):
     flipped_card = deck.pop()
 
     return hands, flipped_card
-    
-    
+
+"""
+Prints to console each player and their current hands.
+"""  
+def print_hands(num_players, player_hands, flipped_card):
+    for player in range(1, num_players + 1):
+        print(f"Player {player}'s hand:")
+        for card in range(0, 5):
+            print(player_hands[player][card].show_string())
+        print("==========")
+    print(f"Flipped card: {flipped_card.show_string()}")
+    print("==========")
 
 """
 Returns an ordered array of Cards making up a euchre deck.
@@ -49,11 +59,6 @@ def deal(deck, num_players):
                 hands[p][i] = deck.pop()
         
     return hands, deck
-    #self.trump = self.deck.draw_card()
-
-
-
-
 
 
 class Card:
