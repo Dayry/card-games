@@ -115,4 +115,18 @@ class Card:
         return suit, value
 
     def show_string(self):
+        # Left bower, keep actual suit as trumps, but its 
+        # display to its original suit
+        if self.num_value == 15:
+            display_suit = None
+            if self.suit.lower() == "diamonds":
+                display_suit = "Hearts"
+            elif self.suit.lower() == "hearts":
+                display_suit = "Diamonds"
+            elif self.suit.lower() == "spades":
+                display_suit = "Clubs"
+            elif self.suit.lower() == "clubs":
+                display_suit = "Spades"
+            return f"{self.value} of {display_suit}"
+
         return f"{self.value} of {self.suit}"

@@ -16,8 +16,10 @@ def new_round(player_hands, num_players, trumps, dealer):
         curr_player += 1
         if curr_player > num_players:
             curr_player = 1
+
+    winner = round_winner(played_cards, trumps)
     
-    print(f"Round winner was player: {round_winner(played_cards, trumps)}")
+    return player_hands, winner
 
 
 
@@ -26,8 +28,6 @@ def round_winner(played_cards, trumps):
     for player in range(1, len(played_cards) + 1):
         curr_card = played_cards[player]
         winner_card = compare_cards(winner_card, curr_card, trumps)
-
-    print(f"WINNER CARD: {winner_card.show_string()}")
     
     # Kind of messy having to find the player when the winning 
     # card is already known
@@ -36,6 +36,7 @@ def round_winner(played_cards, trumps):
             return player # this is the player who won
     
 def compare_cards(lead, played, trumps):
+    trumps = trumps.lower()
     # Special case: bowers
     # Right bower
     if lead.num_value == 16:
@@ -50,29 +51,29 @@ def compare_cards(lead, played, trumps):
             return played
     
     # 1. lead is trumps
-    if lead.suit == trumps:
+    if lead.suit.lower() == trumps:
         # a. played is not trumps -> lead wins
-        if played.suit != trumps:
+        if played.suit.lower() != trumps:
             return lead
         # b. played is trumps -> higher value wins
         else:
-            if played.value > lead.value:
+            if played.num_value > lead.num_value:
                 return played
             else:
                 return lead
     
     # 2. lead is not trumps
     # a. played is trumps -> played wins
-    if played.suit == trumps:
+    if played.suit.lower() == trumps:
         return played
     # b. played is not trumps
     else:
     #   1. played is not lead -> lead wins
-        if played.suit != lead.suit:
+        if played.suit.lower() != lead.suit.lower():
             return lead
     #   2. played is lead -> higher value wins
         else:
-            if played.value > lead.value:
+            if played.num_value > lead.num_value:
                 return played
             else:
                 return lead

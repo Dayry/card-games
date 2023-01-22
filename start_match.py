@@ -20,8 +20,9 @@ def start_match(num_players, dealer): # remember to set 3, 1 when calling
 
     if player_made < 0: # Reset hands and flipped card
         print("Reset")
-        player_hands, flipped_card = set_up(num_players)
-        print_hands(num_players, player_hands, flipped_card)
+        return start_match(num_players, dealer)
+        # player_hands, flipped_card = set_up(num_players)
+        # print_hands(num_players, player_hands, flipped_card)
     elif trumps == None:
         print(f"Player {player_made} ordered up the dealer")
         trumps = flipped_card.suit
@@ -33,20 +34,22 @@ def start_match(num_players, dealer): # remember to set 3, 1 when calling
     player_hands = change_jack_value(player_hands, trumps, num_players)
 
     # play the round
-    new_round(player_hands, num_players, trumps, dealer)
+    player_hands, winner = new_round(player_hands, num_players, trumps, dealer)
+
+    print(f"Round winner was player: {winner}")
 
 
 
 def change_jack_value(player_hands, new_suit, num_players):
     left_bower = None
-    new_suit = new_suit.lower()
-    if new_suit == "diamonds":
+    new_suit_c = new_suit.lower()
+    if new_suit_c == "diamonds":
         left_bower = "hearts"
-    elif new_suit == "hearts":
+    elif new_suit_c == "hearts":
         left_bower = "diamonds"
-    elif new_suit == "spades":
+    elif new_suit_c == "spades":
         left_bower = "clubs"
-    elif new_suit == "clubs":
+    elif new_suit_c == "clubs":
         left_bower = "spades"
 
     for player in range(1, num_players + 1):
@@ -55,6 +58,7 @@ def change_jack_value(player_hands, new_suit, num_players):
             # Left bower
             if card.suit.lower() == left_bower and card.num_value == 11:
                 player_hands[player][card_i].num_value = 15
+                player_hands[player][card_i].suit = new_suit
             # Right bower
             if card.suit.lower() == new_suit and card.num_value == 11:
                 player_hands[player][card_i].num_value = 16
