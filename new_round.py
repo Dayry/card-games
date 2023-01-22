@@ -9,8 +9,11 @@ def new_round(player_hands, num_players, trumps, dealer):
     while turns <= num_players:
         print(f"Player: {curr_player}")
         # Will only change if lead_suit was None
-        lead_suit, played = turn(player_hands[curr_player], lead_suit)
-        #played_cards.append({curr_player: played})
+        lead_suit, played, played_index = turn(player_hands[curr_player], lead_suit)
+
+        # set played card in players hand to None
+        player_hands[curr_player][played_index] = None
+
         played_cards[curr_player] = played
         turns += 1
         curr_player += 1
@@ -83,7 +86,7 @@ def turn(player_hand, lead):
 
     if not lead: # no lead, so make it
         lead = player_hand[chosen_card_index].suit
-    return lead, player_hand[chosen_card_index]
+    return lead, player_hand[chosen_card_index], chosen_card_index
 
 """
 Given an array of Cards, shows them to the user and returns the index of the
@@ -125,7 +128,8 @@ def get_user_card(hand, lead):
 
 def hand_must_follow(hand, lead):
     for card in hand:
-        if card.suit == lead:
-            return True
+        if card: # checks theres a card there, not None
+            if card.suit == lead:
+                return True
     
     return False

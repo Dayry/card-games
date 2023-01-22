@@ -9,6 +9,7 @@ def main():
     # track each round winner
     # remove the played card from players hands
     # impliment match (5 rounds)
+    # round winner plays first next round
 
     start_match(3, 1)
 

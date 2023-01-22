@@ -21,8 +21,6 @@ def start_match(num_players, dealer): # remember to set 3, 1 when calling
     if player_made < 0: # Reset hands and flipped card
         print("Reset")
         return start_match(num_players, dealer)
-        # player_hands, flipped_card = set_up(num_players)
-        # print_hands(num_players, player_hands, flipped_card)
     elif trumps == None:
         print(f"Player {player_made} ordered up the dealer")
         trumps = flipped_card.suit
@@ -33,10 +31,14 @@ def start_match(num_players, dealer): # remember to set 3, 1 when calling
     # Change the value of the jacks for right and left bower
     player_hands = change_jack_value(player_hands, trumps, num_players)
 
+
     # play the round
     player_hands, winner = new_round(player_hands, num_players, trumps, dealer)
+    print(f"Round 1 winner was player: {winner}")
 
-    print(f"Round winner was player: {winner}")
+    print_hands(num_players, player_hands, flipped_card)
+    player_hands, winner = new_round(player_hands, num_players, trumps, dealer)
+    print(f"Round 2 winner was player: {winner}")
 
 
 

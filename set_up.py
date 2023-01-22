@@ -19,7 +19,11 @@ def print_hands(num_players, player_hands, flipped_card):
     for player in range(1, num_players + 1):
         print(f"Player {player}'s hand:")
         for card in range(0, 5):
-            print(player_hands[player][card].show_string())
+            card_to_display = player_hands[player][card]
+            if card_to_display:
+                print(card_to_display.show_string())
+            else:
+                print("No card")
         print("==========")
     print(f"Flipped card: {flipped_card.show_string()}")
     print("==========")
