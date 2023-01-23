@@ -32,13 +32,19 @@ def start_match(num_players, dealer): # remember to set 3, 1 when calling
     player_hands = change_jack_value(player_hands, trumps, num_players)
 
 
-    # play the round
-    player_hands, winner = new_round(player_hands, num_players, trumps, dealer)
-    print(f"Round 1 winner was player: {winner}")
+    # Play the rounds
+    scores = {}
+    for player in range(1, num_players + 1):
+        scores[player] = 0
 
-    print_hands(num_players, player_hands, flipped_card)
-    player_hands, winner = new_round(player_hands, num_players, trumps, dealer)
-    print(f"Round 2 winner was player: {winner}")
+    for r in range(0, 5):
+        print_hands(num_players, player_hands, flipped_card)
+        player_hands, winner = new_round(player_hands, num_players, trumps, dealer)
+        print(f"Round {r+1} winner was player: {winner}")
+        scores[winner] += 1
+
+    for player in range(1, num_players + 1):
+        print(f"Player {player: }{scores[player]} point(s)")
 
 
 

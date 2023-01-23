@@ -6,10 +6,9 @@ def main():
     # Turn one person play a card
 
     # to do:
-    # track each round winner
-    # remove the played card from players hands
     # impliment match (5 rounds)
-    # round winner plays first next round
+    # track each round winner
+    # bug: round winner plays first next round not yet implemented
 
     start_match(3, 1)
 
