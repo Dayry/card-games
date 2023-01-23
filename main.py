@@ -6,9 +6,14 @@ def main():
     # Turn one person play a card
 
     # to do:
-    # impliment match (5 rounds)
-    # track each round winner
+    # Track 'opponent' (who orders or makes it)
+    # track each match winner/who gets points
     # bug: round winner plays first next round not yet implemented
+    # 
+    # Loop match until someone has Winning_points
+    #
+    # Ui is ugly
+
 
     start_match(3, 1)
 
