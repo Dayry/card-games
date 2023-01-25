@@ -37,11 +37,16 @@ def start_match(num_players, dealer): # remember to set 3, 1 when calling
     for player in range(1, num_players + 1):
         scores[player] = 0
 
+    go_first = dealer + 1
+    if go_first > num_players:
+        go_first = 1
+
     for r in range(0, 5):
         print_hands(num_players, player_hands, flipped_card)
-        player_hands, winner = new_round(player_hands, num_players, trumps, dealer)
+        player_hands, winner = new_round(player_hands, num_players, trumps, go_first)
         print(f"Round {r+1} winner was player: {winner}")
         scores[winner] += 1
+        go_first = winner
 
     # Distripute points RETURN POINTS
     # for player in range(1, num_players + 1):

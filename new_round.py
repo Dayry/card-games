@@ -1,6 +1,6 @@
-def new_round(player_hands, num_players, trumps, dealer):
+def new_round(player_hands, num_players, trumps, curr_player):
     turns = 1
-    curr_player = dealer + 1
+    #curr_player = go_first
     if curr_player > num_players:
         curr_player = 1
     lead_suit = None
