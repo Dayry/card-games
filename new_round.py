@@ -1,3 +1,6 @@
+"""
+Plays a round, each player plays one card following the game rules.
+"""
 def new_round(player_hands, num_players, trumps, curr_player):
     turns = 1
     #curr_player = go_first
@@ -26,6 +29,9 @@ def new_round(player_hands, num_players, trumps, curr_player):
 
 
 
+"""
+Determines the winner of the round (which card won), returns that player.
+"""
 def round_winner(played_cards, trumps):
     winner_card = played_cards[1]
     for player in range(1, len(played_cards) + 1):
@@ -37,7 +43,10 @@ def round_winner(played_cards, trumps):
     for player in range(1, len(played_cards) + 1):
         if played_cards[player] == winner_card:
             return player # this is the player who won
-    
+
+"""
+Determines the winner of two cards and returns it
+"""
 def compare_cards(lead, played, trumps):
     trumps = trumps.lower()
     # Special case: bowers
@@ -81,6 +90,9 @@ def compare_cards(lead, played, trumps):
             else:
                 return lead
 
+"""
+Given a hand and the card that lead, prompts the player to play a card.
+"""
 def turn(player_hand, lead):
     chosen_card_index = get_user_card(player_hand, lead)
 
@@ -126,6 +138,9 @@ def get_user_card(hand, lead):
         print("==========")
         return int(player_input) - 1
 
+"""
+Checks to see if player has to follow suit.
+"""
 def hand_must_follow(hand, lead):
     for card in hand:
         if card: # checks theres a card there, not None

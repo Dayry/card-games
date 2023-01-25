@@ -1,3 +1,6 @@
+"""
+Prompts players to either order up the deal, or make the trumps.
+"""
 def choose_trump(num_players, dealer, flipped):
     pick_up = order_pick_up(num_players, dealer, flipped)
     if pick_up > 0:

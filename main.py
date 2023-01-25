@@ -7,6 +7,7 @@ def main():
 
     # to do:
     # Ui is ugly
+    # full test
 
 
     euchre(3, 11)

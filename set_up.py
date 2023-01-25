@@ -21,12 +21,14 @@ def print_hands(num_players, player_hands, flipped_card):
         for card in range(0, 5):
             card_to_display = player_hands[player][card]
             if card_to_display:
-                print(card_to_display.show_string())
+                print(f"{card}:{card_to_display.show_string()}")
             else:
-                print("No card")
+                print(f"{card}:No card")
         print("==========")
     print(f"Flipped card: {flipped_card.show_string()}")
     print("==========")
+
+
 
 """
 Returns an ordered array of Cards making up a euchre deck.

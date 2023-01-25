@@ -1,5 +1,8 @@
 from start_match import start_match
 
+"""
+Plays a game of euchre.
+"""
 def euchre(num_players, winning_points=11):
     dealer = 1
     game_scores = {}
@@ -18,10 +21,18 @@ def euchre(num_players, winning_points=11):
             game_scores[player[0]] += player[1]
 
         playing, game_winners = check_game_winner(game_scores, winning_points)
+        dealer += 1
+        if dealer > num_players:
+            dealer = 1
     
     for winner in game_winners:
         print(f"Player {winner} has won!")
 
+
+
+"""
+Checks to see if any players have reached the winning score.
+"""
 def check_game_winner(game_scores, winning_points):
     winners = []
     playing = True
@@ -32,7 +43,9 @@ def check_game_winner(game_scores, winning_points):
     
     return playing, winners
 
-
+"""
+Checks to see how many points each player should get.
+"""
 def check_match_winners(scores, opponent):
     winners = []
     # Order up/make won
