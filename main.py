@@ -1,4 +1,4 @@
-from start_match import start_match
+from euchre import euchre
 
 def main():
     # Match is 5 rounds
@@ -15,7 +15,7 @@ def main():
     # Ui is ugly
 
 
-    start_match(3, 1)
+    euchre(3, 11)
 
 
 

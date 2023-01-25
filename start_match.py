@@ -43,8 +43,10 @@ def start_match(num_players, dealer): # remember to set 3, 1 when calling
         print(f"Round {r+1} winner was player: {winner}")
         scores[winner] += 1
 
-    for player in range(1, num_players + 1):
-        print(f"Player {player: }{scores[player]} point(s)")
+    # Distripute points RETURN POINTS
+    # for player in range(1, num_players + 1):
+    #     print(f"Player {player}: {scores[player]} point(s)")
+    return scores, player_made
 
 
 
