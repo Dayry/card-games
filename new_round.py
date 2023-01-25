@@ -3,7 +3,6 @@ Plays a round, each player plays one card following the game rules.
 """
 def new_round(player_hands, num_players, trumps, curr_player):
     turns = 1
-    #curr_player = go_first
     if curr_player > num_players:
         curr_player = 1
     lead_suit = None
@@ -109,9 +108,9 @@ def get_user_card(hand, lead):
     print(f"Your hand is: ")
     for card in hand:
         if card != None:
-            print(f"{count}:{card.show_string()}")
+            print(f"{count}: {card.show_string()}")
         else:
-            print(f"{count}:No card")
+            print(f"{count}: No card")
         count += 1
             
     while True:

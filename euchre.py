@@ -13,11 +13,13 @@ def euchre(num_players, winning_points=11):
     game_winners = []
 
     while playing:
+        print("\nNew Match")
         scores, opponent = start_match(num_players, dealer)
         match_winners = check_match_winners(scores, opponent)
 
-        #Distrubute points
+        # Distrubute points
         for player in match_winners:
+            print(f"player {player[0]} got {player[1]} point(s) for winning the match!")
             game_scores[player[0]] += player[1]
 
         playing, game_winners = check_game_winner(game_scores, winning_points)

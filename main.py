@@ -6,11 +6,11 @@ def main():
     # Turn one person play a card
 
     # to do:
-    # Ui is ugly
+    # bugs: see paper
     # full test
 
 
-    euchre(3, 11)
+    euchre(3, 3)
 
 
 

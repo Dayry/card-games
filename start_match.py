@@ -2,7 +2,10 @@ from set_up import set_up, print_hands
 from choose_trump import choose_trump
 from new_round import new_round
 
-def start_match(num_players, dealer): # remember to set 3, 1 when calling
+"""
+Starts a new match by shuffling a deck, dealing and flipping a card and playing it out
+"""
+def start_match(num_players, dealer):
     # Create deck and shuffle
     # Deal to each player
     # Flip card     
@@ -28,6 +31,8 @@ def start_match(num_players, dealer): # remember to set 3, 1 when calling
     else:
         print(f"Player {player_made} made trumps {trumps}")
 
+    print("==========")
+
     # Change the value of the jacks for right and left bower
     player_hands = change_jack_value(player_hands, trumps, num_players)
 
@@ -42,19 +47,21 @@ def start_match(num_players, dealer): # remember to set 3, 1 when calling
         go_first = 1
 
     for r in range(0, 5):
-        print_hands(num_players, player_hands, flipped_card)
+        print(f"Round {r+1}")
+        #print_hands(num_players, player_hands, flipped_card)
         player_hands, winner = new_round(player_hands, num_players, trumps, go_first)
         print(f"Round {r+1} winner was player: {winner}")
+        print("==========")
         scores[winner] += 1
         go_first = winner
 
-    # Distripute points RETURN POINTS
-    # for player in range(1, num_players + 1):
-    #     print(f"Player {player}: {scores[player]} point(s)")
     return scores, player_made
 
 
 
+"""
+Changes the values of the right and left bower for trump suit.
+"""
 def change_jack_value(player_hands, new_suit, num_players):
     left_bower = None
     new_suit_c = new_suit.lower()
@@ -80,6 +87,9 @@ def change_jack_value(player_hands, new_suit, num_players):
     
     return player_hands
 
+"""
+Prompts the dealer to pickup the flipped card if ordered up.
+"""
 def dealer_pick_up(hand, flipped_card):
     count = 1
     for i in range(0, 5):
