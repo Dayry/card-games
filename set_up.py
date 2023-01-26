@@ -91,7 +91,7 @@ class Card:
         else:
             print("Invalid suit number")
 
-        if v == 1 or v == 14:
+        if v == 14:
             value = "Ace"
         elif v == 2:
             value = "Two"
@@ -115,13 +115,13 @@ class Card:
             value = "Queen"
         elif v == 13:
             value = "King"
-        else: # v == 11 or v == 15 or v == 16+:
+        else: # v == 11 or v == 15 or v == 16:
             value = "Jack"
 
         return suit, value
 
     def show_string(self):
-        # Left bower, keep actual suit as trumps, but its 
+        # Left bower, keep actual suit as trumps, but change its 
         # display to its original suit
         if self.num_value == 15:
             display_suit = None

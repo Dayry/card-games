@@ -7,9 +7,13 @@ def main():
 
     # to do:
     # bugs: see paper
+    # done: Must follow wont trigger on the left bower
     # full test
 
+    # Card class has string and num representation but num isnt really used
+    # Even though a num for the suit would make more sense (.lower())
 
+    # Number of player, and optional winning score inputs
     euchre(3, 3)
 
 
