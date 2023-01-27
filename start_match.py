@@ -82,7 +82,7 @@ def change_jack_value(player_hands, new_suit, num_players):
                 player_hands[player][card_i].num_value = 15
                 player_hands[player][card_i].suit = new_suit.capitalize()
             # Right bower
-            if card.suit.lower() == new_suit and card.num_value == 11:
+            if card.suit.lower() == new_suit_c and card.num_value == 11:
                 player_hands[player][card_i].num_value = 16
     
     return player_hands
