@@ -1,23 +1,4 @@
 # Euchre
-Plays a game of Euchre.
-
-## Notes
-    # Match is 5 rounds
-    # round n turns, one each player
-    # Turn one person play a card
-
-    # Card class has string and num representation but num isnt really used
-    # Even though a num for the suit would make more sense (.lower())
-
-## To Do
-    Game instructiuons
-    Program instructions
-    Notes (downsides, future plans, etc)
-    
- 
-
-
-# Euchre
 
 A text based version of the playing card game Euchre.
 
@@ -33,6 +14,32 @@ Currently just runs with main.py
 ```
 python main.py
 ```
+### How to play
+* Each player is dealt a hand and a card is flipped.
+* This flipped cards suit is "trumps"
+* Each player has the option of "ordering up" the deal, the dealer picks up the card and swaps with another, that player is the "opponent" and must win at least 3 of the 5 turns to win, otherwise any other player that won at least one turn with get a point.
+* If no one orders up the dealer (including the dealer) then each player has the option of choosing which suit they want it to be (they cannot chose the suit that was flipped), if they make it they become the "opponent"
+* The player starting at dealer + 1 begins byt playing a card
+* Each player follows, the winning card for the turn is either; the highest trump or if there are no trumps then the highest of the suit that was played first.
+* the turn winner begins the next turn
+
+Card values lowest to highest
+* 7 to Ace
+* But the Jack of the trump suit is the highest value, and the Jack of the same colour suit (i.e if Spades is trumps then Clubs) is the second highest value.
+* These are called the Right Bower (same suit trump) and Left Bower (Same colour as trump)
+
+Scoring
+* Opponent gets 3 or 4 wins: 1 Point
+* Opponent gets all 5 wins: 2 Points
+* Opponent doesn't get at least 3 wins: each player that got at least 1 win get: 1 Point
+* If there was only one player in the above then they get: 2 Points
+* One player that isn't the opponent gets all 5 wins: 4 Points
+
+## To do
+* Card class has an int representation that isn't used, this would be a lot better than constantly comparing hard coded strings and making sure the case is right for them all.
+* The user interface shows all player hands, add in a prompt to make sure only current player is looking at the screen; or just add in a real GUI.
+* Make this the basis of a server side program and write a client side program to access this as an API.
+
 ## Author
 
 Contributors names and contact info
