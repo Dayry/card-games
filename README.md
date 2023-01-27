@@ -37,6 +37,7 @@ Scoring
 * One player that isn't the opponent gets all 5 wins: 4 Points
 
 ## To do
+* Allow user to pick the number of players
 * Card class has an int representation that isn't used, this would be a lot better than constantly comparing hard coded strings and making sure the case is right for them all.
 * The user interface shows all player hands, add in a prompt to make sure only current player is looking at the screen; or just add in a real GUI.
 * Make this the basis of a server side program and write a client side program to access this as an API.
