@@ -14,7 +14,7 @@ def main():
     # Even though a num for the suit would make more sense (.lower())
 
     # Number of player, and optional winning score inputs
-    euchre(3, 3)
+    euchre(4, 3)
 
 
 

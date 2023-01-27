@@ -22,7 +22,7 @@ def new_round(player_hands, num_players, trumps, curr_player):
         if curr_player > num_players:
             curr_player = 1
 
-    winner = round_winner(played_cards, trumps)
+    winner = round_winner(played_cards, trumps, lead_suit)
     
     return player_hands, winner
 
@@ -31,11 +31,11 @@ def new_round(player_hands, num_players, trumps, curr_player):
 """
 Determines the winner of the round (which card won), returns that player.
 """
-def round_winner(played_cards, trumps):
+def round_winner(played_cards, trumps, lead_suit):
     winner_card = played_cards[1]
     for player in range(1, len(played_cards) + 1):
         curr_card = played_cards[player]
-        winner_card = compare_cards(winner_card, curr_card, trumps)
+        winner_card = compare_cards(winner_card, curr_card, trumps, lead_suit)
     
     # Kind of messy having to find the player when the winning 
     # card is already known
@@ -46,7 +46,9 @@ def round_winner(played_cards, trumps):
 """
 Determines the winner of two cards and returns it
 """
-def compare_cards(lead, played, trumps):
+def compare_cards(lead, played, trumps, lead_suit):
+    print(f"Lead: {lead.show_string()} value: {lead.num_value} suit: {lead.suit} trumps: {trumps}")
+    print(f"played: {played.show_string()} value: {played.num_value} suit: {played.suit} trumps: {trumps}")
     trumps = trumps.lower()
     # Special case: bowers
     # Right bower
@@ -77,17 +79,21 @@ def compare_cards(lead, played, trumps):
     # a. played is trumps -> played wins
     if played.suit.lower() == trumps:
         return played
-    # b. played is not trumps
+    # b. played is not trumps and lead is not trumps
     else:
-    #   1. played is not lead -> lead wins
-        if played.suit.lower() != lead.suit.lower():
-            return lead
-    #   2. played is lead -> higher value wins
-        else:
+    #   played is the leading suit but lead is not -> played wins
+        if played.suit.lower() == lead_suit.lower() and lead.suit.lower() != lead_suit.lower():
+            return played
+    #   otherwise neither is lead, or trumps 
+    #   If they're the same suit, highest wins
+        elif played.suit.lower() == lead.suit.lower():
             if played.num_value > lead.num_value:
                 return played
             else:
                 return lead
+    #   else lead wins
+        else:
+            return lead
 
 """
 Given a hand and the card that lead, prompts the player to play a card.
